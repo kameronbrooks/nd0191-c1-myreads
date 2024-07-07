@@ -131,6 +131,7 @@ body,
 }
 .book-title {
   margin-top: 10px;
+  font-weight: 700;
 }
 .book-authors {
   color: #999;
@@ -174,6 +175,30 @@ body,
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+.book-cover.read {
+  border: 4px solid #2e7c31;
+  opacity: 0.8;
+}
+.book-cover.currentlyReading {
+  border: 4px solid #f9a825;
+}
+.book-cover.wantToRead {
+  border: 4px dashed #8b2c7f;
+}
+
+.book-shelf {
+  font-size: 0.8em;
+}
+.book-shelf.read {
+  color: #2e7c31;
+}
+.book-shelf.currentlyReading {
+  color: #f9a825;
+}
+.book-shelf.wantToRead {
+  color: #8b2c7f;
 }
 
 

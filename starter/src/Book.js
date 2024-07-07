@@ -6,7 +6,7 @@ const Book = ({book, userBooks, setUserBooks, setBannerMessage}) => {
     <div className="book">
       <div className="book-top">
         <div
-          className="book-cover"
+          className={`book-cover ${book.shelf}`}
           style={{
             width: 128,
             height: 193,
@@ -22,7 +22,10 @@ const Book = ({book, userBooks, setUserBooks, setBannerMessage}) => {
         />
       </div>
       <div className="book-title">{book.title}</div>
-      <div className="book-authors">{book.authors && book.authors.join(", ")}</div>
+      {book.shelf === "currentlyReading" && <div className={`book-shelf ${book.shelf}`}>[Currently Reading]</div>}
+      {book.shelf === "wantToRead" && <div className={`book-shelf ${book.shelf}`}>[Want to Read]</div>}
+      {book.shelf === "read" && <div className={`book-shelf ${book.shelf}`}>[Read]</div>}
+      <div className="book-authors">{book.authors ? book.authors.join(", ") : "No Authors"}</div>
     </div>
   )
 }

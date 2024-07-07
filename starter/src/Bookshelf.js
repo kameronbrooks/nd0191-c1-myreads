@@ -2,14 +2,16 @@ import Book from "./Book";
 import PropTypes from 'prop-types';
 
 const Bookshelf = ({header, bookshelfName, userBooks, setUserBooks, setBannerMessage}) => {
-
+  const books = userBooks.filter((b)=>b.shelf===bookshelfName);
+  const bookCount = books.length;
+  
   return (
     <div className="bookshelf">
-      <h2 className="bookshelf-title">{header}</h2>
+      <h2 className="bookshelf-title">{`${header} [${bookCount}]`}</h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
           {
-          userBooks.filter((b)=>b.shelf===bookshelfName).map((book) => (
+          books.map((book) => (
             <li key={book.id}>
               <Book
                 book={book}
