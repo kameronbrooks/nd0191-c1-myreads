@@ -1,6 +1,23 @@
 import * as BooksAPI from './BooksAPI';
+import PropTypes from 'prop-types';
+import { WANT_TO_READ, CURRENTLY_READING, READ } from './constants';
 
 const BookShelfChanger = ({ book, bookshelves, setBookshelves, setBannerMessage }) => {
+
+  const optionData = [{
+    shelf: CURRENTLY_READING,
+    text: 'Currently Reading'
+  }, {
+    shelf: WANT_TO_READ,
+    text: 'Want to Read'
+  }, {
+    shelf: READ,
+    text: 'Read'
+  }, {
+    shelf: 'none',
+    text: 'None'
+  
+  }]
 
   const handleChange = (e) => {
     const shelfName = e.target.value;
@@ -18,7 +35,7 @@ const BookShelfChanger = ({ book, bookshelves, setBookshelves, setBannerMessage 
           return [
             shelf,
             shelf === shelfName
-              ? [...books, book]
+              ? [...books, {...book, shelf: shelfName}]
               : books.filter((b) => b.id !== book.id)
           ]
           }
@@ -37,19 +54,28 @@ const BookShelfChanger = ({ book, bookshelves, setBookshelves, setBannerMessage 
 
   return (
     <div className="book-shelf-changer">
-      <select onChange={handleChange} defaultValue='placeholder'>
-        <option value="placeholder" disabled>
+      <select onChange={handleChange} value={book.shelf || "none"}>
+        <option value="none" disabled>
           Move to...
         </option>
-        <option value="currentlyReading">
-          Currently Reading
-        </option>
-        <option value="wantToRead">Want to Read</option>
-        <option value="read">Read</option>
-        <option value="none">None</option>
+        {
+          // Filter out the current shelf from the options
+          optionData.map((option) => (
+            <option key={option.shelf} value={option.shelf} disabled={option.shelf===book.shelf}>
+              {option.text}
+            </option>
+          ))
+        }
       </select>
     </div>
   )
 }
+
+BookShelfChanger.propTypes = {
+  book: PropTypes.object.isRequired,
+  bookshelves: PropTypes.object.isRequired,
+  setBookshelves: PropTypes.func.isRequired,
+  setBannerMessage: PropTypes.func.isRequired
+};
 
 export default BookShelfChanger;

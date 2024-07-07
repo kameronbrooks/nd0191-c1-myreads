@@ -28,7 +28,7 @@ function App() {
           [READ]: []
         };
         books.forEach((book) => {
-          bookshelves[book.shelf].push(book);
+          bookshelves[book.shelf] = bookshelves[book.shelf].concat(book);
         });
         setBookshelves(bookshelves);
       } catch (error) {

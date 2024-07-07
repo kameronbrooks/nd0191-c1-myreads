@@ -1,4 +1,5 @@
 import BookShelfChanger from "./BookShelfChanger";
+import PropTypes from 'prop-types';
 
 const Book = ({book, bookshelves, setBookshelves, setBannerMessage}) => {
   return (
@@ -24,6 +25,13 @@ const Book = ({book, bookshelves, setBookshelves, setBannerMessage}) => {
       <div className="book-authors">{book.authors && book.authors.join(", ")}</div>
     </div>
   )
+}
+
+Book.propTypes = {
+  book: PropTypes.object.isRequired,
+  bookshelves: PropTypes.object.isRequired,
+  setBookshelves: PropTypes.func.isRequired,
+  setBannerMessage: PropTypes.func.isRequired
 }
 
 export default Book;

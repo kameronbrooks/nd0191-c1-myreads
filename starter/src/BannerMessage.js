@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './BannerMessage.css';
+import PropTypes from 'prop-types';
 
 const BannerMessage = ({bannerMessage, setBannerMessage}) => {
   const [fade, setFade] = useState(false);
@@ -31,6 +32,11 @@ const BannerMessage = ({bannerMessage, setBannerMessage}) => {
       <button className='close-button' onClick={() => setBannerMessage(null)}>X</button>
     </div>
   )
+}
+
+BannerMessage.propTypes = {
+  bannerMessage: PropTypes.object,
+  setBannerMessage: PropTypes.func.isRequired
 }
 
 export default BannerMessage;

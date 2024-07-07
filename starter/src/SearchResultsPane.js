@@ -1,4 +1,5 @@
 import Book from './Book';
+import PropTypes from 'prop-types';
 
 const SearchResultsPane = ({searchQuery, searchResults, bookshelves, setBookshelves, setBannerMessage}) => {
   return (
@@ -25,6 +26,14 @@ const SearchResultsPane = ({searchQuery, searchResults, bookshelves, setBookshel
       </ol>
     </div>
     )
+}
+
+SearchResultsPane.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+  searchResults: PropTypes.array.isRequired,
+  bookshelves: PropTypes.object.isRequired,
+  setBookshelves: PropTypes.func.isRequired,
+  setBannerMessage: PropTypes.func.isRequired
 }
 
 export default SearchResultsPane;

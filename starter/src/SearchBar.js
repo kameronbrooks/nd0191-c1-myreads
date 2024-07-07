@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
   return (
@@ -13,6 +14,11 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
       </div>
     </div>
   )
+}
+
+SearchBar.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+  setSearchQuery: PropTypes.func.isRequired
 }
 
 export default SearchBar;

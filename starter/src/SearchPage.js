@@ -6,6 +6,7 @@ import Book from './Book';
 import BannerMessage from './BannerMessage';
 import SearchBar from './SearchBar';
 import SearchResultsPane from './SearchResultsPane';
+import PropTypes from 'prop-types';
 
 const SearchPage = ({ bookshelves, setBookshelves, setBannerMessage }) => {
   const [searchResults, setSearchResults] = useState([]);
@@ -45,5 +46,11 @@ const SearchPage = ({ bookshelves, setBookshelves, setBannerMessage }) => {
     </div>
   )
 };
+
+SearchPage.propTypes = {
+  bookshelves: PropTypes.object.isRequired,
+  setBookshelves: PropTypes.func.isRequired,
+  setBannerMessage: PropTypes.func.isRequired
+}
 
 export default SearchPage;
