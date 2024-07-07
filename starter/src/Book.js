@@ -1,7 +1,7 @@
 import BookShelfChanger from "./BookShelfChanger";
 import PropTypes from 'prop-types';
 
-const Book = ({book, bookshelves, setBookshelves, setBannerMessage}) => {
+const Book = ({book, userBooks, setUserBooks, setBannerMessage}) => {
   return (
     <div className="book">
       <div className="book-top">
@@ -16,8 +16,8 @@ const Book = ({book, bookshelves, setBookshelves, setBannerMessage}) => {
         ></div>
         <BookShelfChanger
           book={book}
-          bookshelves={bookshelves}
-          setBookshelves={setBookshelves}
+          userBooks={userBooks}
+          setUserBooks={setUserBooks}
           setBannerMessage={setBannerMessage}
         />
       </div>
@@ -29,8 +29,8 @@ const Book = ({book, bookshelves, setBookshelves, setBannerMessage}) => {
 
 Book.propTypes = {
   book: PropTypes.object.isRequired,
-  bookshelves: PropTypes.object.isRequired,
-  setBookshelves: PropTypes.func.isRequired,
+  userBooks: PropTypes.object.isRequired,
+  setUserBooks: PropTypes.func.isRequired,
   setBannerMessage: PropTypes.func.isRequired
 }
 

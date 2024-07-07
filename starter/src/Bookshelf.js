@@ -1,7 +1,7 @@
 import Book from "./Book";
+import PropTypes from 'prop-types';
 
-const Bookshelf = ({header, bookshelfName, bookshelves, setBookshelves, setBannerMessage}) => {
-  const books = bookshelves[bookshelfName];
+const Bookshelf = ({header, bookshelfName, userBooks, setUserBooks, setBannerMessage}) => {
 
   return (
     <div className="bookshelf">
@@ -9,12 +9,12 @@ const Bookshelf = ({header, bookshelfName, bookshelves, setBookshelves, setBanne
       <div className="bookshelf-books">
         <ol className="books-grid">
           {
-          books.map((book) => (
+          userBooks.filter((b)=>b.shelf===bookshelfName).map((book) => (
             <li key={book.id}>
               <Book
                 book={book}
-                bookshelves={bookshelves}
-                setBookshelves={setBookshelves}
+                userBooks={userBooks}
+                setUserBooks={setUserBooks}
                 setBannerMessage={setBannerMessage}
               />
             </li>
@@ -24,6 +24,14 @@ const Bookshelf = ({header, bookshelfName, bookshelves, setBookshelves, setBanne
       </div>
     </div>
   );
+}
+
+Bookshelf.propTypes = {
+  header: PropTypes.string.isRequired,
+  bookshelfName: PropTypes.string.isRequired,
+  userBooks: PropTypes.object.isRequired,
+  setUserBooks: PropTypes.func.isRequired,
+  setBannerMessage: PropTypes.func.isRequired
 }
 
 export default Bookshelf;

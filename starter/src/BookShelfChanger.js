@@ -2,7 +2,7 @@ import * as BooksAPI from './BooksAPI';
 import PropTypes from 'prop-types';
 import { WANT_TO_READ, CURRENTLY_READING, READ } from './constants';
 
-const BookShelfChanger = ({ book, bookshelves, setBookshelves, setBannerMessage }) => {
+const BookShelfChanger = ({ book, userBooks, setUserBooks, setBannerMessage }) => {
 
   const optionData = [{
     shelf: CURRENTLY_READING,
@@ -22,25 +22,14 @@ const BookShelfChanger = ({ book, bookshelves, setBookshelves, setBannerMessage 
   const handleChange = (e) => {
     const shelfName = e.target.value;
 
-    // If the book is already on the shelf, don't do anything
-    if(bookshelves[shelfName] && bookshelves[shelfName].includes(book)) {
-      setBannerMessage({status: 'failed', message: 'Good news! This book is already on this shelf :)'});
-      return;
-    }
+    let newBooklist = userBooks.filter((b) => b.id !== book.id)
 
+    if(shelfName !== "none") {
+      newBooklist = newBooklist.concat({...book, shelf: shelfName});
+    }
     // If the book is not on the shelf, remove it from the current shelf(if applicable) and add it to the new shelf
-    setBookshelves(
-      Object.fromEntries(
-        Object.entries(bookshelves).map(([shelf, books]) => {
-          return [
-            shelf,
-            shelf === shelfName
-              ? [...books, {...book, shelf: shelfName}]
-              : books.filter((b) => b.id !== book.id)
-          ]
-          }
-        )
-      )
+    setUserBooks(
+      newBooklist
     );
     
     // Update the book's shelf on the server
@@ -55,7 +44,7 @@ const BookShelfChanger = ({ book, bookshelves, setBookshelves, setBannerMessage 
   return (
     <div className="book-shelf-changer">
       <select onChange={handleChange} value={book.shelf || "none"}>
-        <option value="none" disabled>
+        <option value="placeholder" disabled>
           Move to...
         </option>
         {
@@ -73,8 +62,8 @@ const BookShelfChanger = ({ book, bookshelves, setBookshelves, setBannerMessage 
 
 BookShelfChanger.propTypes = {
   book: PropTypes.object.isRequired,
-  bookshelves: PropTypes.object.isRequired,
-  setBookshelves: PropTypes.func.isRequired,
+  userBooks: PropTypes.object.isRequired,
+  setUserBooks: PropTypes.func.isRequired,
   setBannerMessage: PropTypes.func.isRequired
 };
 

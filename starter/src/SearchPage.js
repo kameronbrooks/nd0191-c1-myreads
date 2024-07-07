@@ -8,9 +8,25 @@ import SearchBar from './SearchBar';
 import SearchResultsPane from './SearchResultsPane';
 import PropTypes from 'prop-types';
 
-const SearchPage = ({ bookshelves, setBookshelves, setBannerMessage }) => {
+const SearchPage = ({ userBooks, setUserBooks, setBannerMessage }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Update the search results when the user's books change
+  // This ensures that the search results reflect the user's books states
+  useEffect(() => {
+    if(!searchResults || searchResults.length === 0) {
+      return;
+    }
+
+    setSearchResults(searchResults.map(
+      (book) => {
+        console.log("Changing search results");
+        const userBook = userBooks.find((b) => b.id === book.id);
+        return userBook ? userBook : {...book, shelf: 'none'};
+      }
+    ));
+  }, [userBooks]);
 
 
   // Update the search results when the search query changes
@@ -27,7 +43,17 @@ const SearchPage = ({ bookshelves, setBookshelves, setBannerMessage }) => {
           setSearchResults([]);
           return;
         }
-        setSearchResults(results);
+
+        setSearchResults(results.map(
+          (book) => {
+            // If the book is not on the shelf, set the shelf to none
+            book = {...book, shelf: 'none'};
+
+            // If the book is on the shelf, set the shelf to the user's shelf
+            const userBook = userBooks.find((b) => b.id === book.id);
+            return userBook ? userBook : book;
+          }
+        ));
 
       } catch (error) {
         console.log(error);
@@ -42,14 +68,14 @@ const SearchPage = ({ bookshelves, setBookshelves, setBannerMessage }) => {
   return (
     <div className="search-books">
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <SearchResultsPane searchQuery={searchQuery} searchResults={searchResults} bookshelves={bookshelves} setBookshelves={setBookshelves} setBannerMessage={setBannerMessage} />
+      <SearchResultsPane searchQuery={searchQuery} searchResults={searchResults} setSearchResults={setSearchResults} userBooks={userBooks} setUserBooks={setUserBooks} setBannerMessage={setBannerMessage} />
     </div>
   )
 };
 
 SearchPage.propTypes = {
-  bookshelves: PropTypes.object.isRequired,
-  setBookshelves: PropTypes.func.isRequired,
+  userBooks: PropTypes.array.isRequired,
+  setUserBooks: PropTypes.func.isRequired,
   setBannerMessage: PropTypes.func.isRequired
 }
 

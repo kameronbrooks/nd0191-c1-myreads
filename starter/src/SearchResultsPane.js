@@ -1,7 +1,7 @@
 import Book from './Book';
 import PropTypes from 'prop-types';
 
-const SearchResultsPane = ({searchQuery, searchResults, bookshelves, setBookshelves, setBannerMessage}) => {
+const SearchResultsPane = ({searchQuery, searchResults, userBooks, setUserBooks, setBannerMessage}) => {
   return (
     searchResults.length === 0 && searchQuery !== "") ?
     (
@@ -17,8 +17,8 @@ const SearchResultsPane = ({searchQuery, searchResults, bookshelves, setBookshel
           <li key={book.id}>
             <Book
               book={book}
-              bookshelves={bookshelves}
-              setBookshelves={setBookshelves}
+              userBooks={userBooks}
+              setUserBooks={setUserBooks}
               setBannerMessage={setBannerMessage}
             />
           </li>
@@ -31,8 +31,8 @@ const SearchResultsPane = ({searchQuery, searchResults, bookshelves, setBookshel
 SearchResultsPane.propTypes = {
   searchQuery: PropTypes.string.isRequired,
   searchResults: PropTypes.array.isRequired,
-  bookshelves: PropTypes.object.isRequired,
-  setBookshelves: PropTypes.func.isRequired,
+  userBooks: PropTypes.object.isRequired,
+  setUserBooks: PropTypes.func.isRequired,
   setBannerMessage: PropTypes.func.isRequired
 }
 

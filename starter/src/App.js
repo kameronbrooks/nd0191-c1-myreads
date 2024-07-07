@@ -9,11 +9,7 @@ import BannerMessage from "./BannerMessage";
 
 function App() {
 
-  const [bookshelves, setBookshelves] = useState({
-    [CURRENTLY_READING]: [],
-    [WANT_TO_READ]: [],
-    [READ]: []
-  });
+  const [userBooks, setUserBooks] = useState([]);
 
   const [bannerMessage, setBannerMessage] = useState(null);
 
@@ -22,15 +18,7 @@ function App() {
     const fetchBooks = async () => {
       try {
         const books = await BooksAPI.getAll();
-        const bookshelves = {
-          [CURRENTLY_READING]: [],
-          [WANT_TO_READ]: [],
-          [READ]: []
-        };
-        books.forEach((book) => {
-          bookshelves[book.shelf] = bookshelves[book.shelf].concat(book);
-        });
-        setBookshelves(bookshelves);
+        setUserBooks(books.filter((book) => book.shelf !== 'none'));
       } catch (error) {
         console.log(error);
       }
@@ -43,8 +31,8 @@ function App() {
       <BannerMessage bannerMessage={bannerMessage} setBannerMessage={setBannerMessage}/>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<IndexPage bookshelves={bookshelves} setBookshelves={setBookshelves} setBannerMessage={setBannerMessage}/>} />
-          <Route path="/search" element={<SearchPage bookshelves={bookshelves} setBookshelves={setBookshelves} setBannerMessage={setBannerMessage}/>} />
+          <Route path="/" element={<IndexPage userBooks={userBooks} setUserBooks={setUserBooks} setBannerMessage={setBannerMessage}/>} />
+          <Route path="/search" element={<SearchPage userBooks={userBooks} setUserBooks={setUserBooks} setBannerMessage={setBannerMessage}/>} />
         </Routes>
       </BrowserRouter>
       
