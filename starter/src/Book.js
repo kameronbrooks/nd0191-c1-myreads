@@ -1,6 +1,6 @@
 import BookShelfChanger from "./BookShelfChanger";
 
-const Book = ({book, bookshelves, setBookshelves}) => {
+const Book = ({book, bookshelves, setBookshelves, setBannerMessage}) => {
   return (
     <div className="book">
       <div className="book-top">
@@ -16,11 +16,12 @@ const Book = ({book, bookshelves, setBookshelves}) => {
         <BookShelfChanger
           book={book}
           bookshelves={bookshelves}
-          setBookshelves={setBookshelves} 
+          setBookshelves={setBookshelves}
+          setBannerMessage={setBannerMessage}
         />
       </div>
       <div className="book-title">{book.title}</div>
-      <div className="book-authors">{book.authors.join(", ")}</div>
+      <div className="book-authors">{book.authors && book.authors.join(", ")}</div>
     </div>
   )
 }

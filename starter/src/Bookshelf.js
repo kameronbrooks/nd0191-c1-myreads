@@ -1,11 +1,11 @@
 import Book from "./Book";
 
-const Bookshelf = ({bookshelfName, bookshelves, setBookshelves}) => {
+const Bookshelf = ({header, bookshelfName, bookshelves, setBookshelves, setBannerMessage}) => {
   const books = bookshelves[bookshelfName];
 
   return (
     <div className="bookshelf">
-      <h2 className="bookshelf-title">{bookshelfName}</h2>
+      <h2 className="bookshelf-title">{header}</h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
           {
@@ -15,6 +15,7 @@ const Bookshelf = ({bookshelfName, bookshelves, setBookshelves}) => {
                 book={book}
                 bookshelves={bookshelves}
                 setBookshelves={setBookshelves}
+                setBannerMessage={setBannerMessage}
               />
             </li>
           ))

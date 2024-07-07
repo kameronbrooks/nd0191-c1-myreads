@@ -175,3 +175,13 @@ body,
   text-align: center;
   font-size: 0.8em;
 }
+
+
+
+/* No search results */
+.no-search-results {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.5em;
+  color: #555;
+}
