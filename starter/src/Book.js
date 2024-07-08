@@ -32,7 +32,7 @@ const Book = ({book, userBooks, setUserBooks, setBannerMessage}) => {
 
 Book.propTypes = {
   book: PropTypes.object.isRequired,
-  userBooks: PropTypes.object.isRequired,
+  userBooks: PropTypes.array.isRequired,
   setUserBooks: PropTypes.func.isRequired,
   setBannerMessage: PropTypes.func.isRequired
 }

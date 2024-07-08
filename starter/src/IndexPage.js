@@ -45,7 +45,7 @@ const IndexPage = ({userBooks, setUserBooks, setBannerMessage}) => {
 };
 
 IndexPage.propTypes = {
-  userBooks: PropTypes.object.isRequired,
+  userBooks: PropTypes.array.isRequired,
   setUserBooks: PropTypes.func.isRequired,
   setBannerMessage: PropTypes.func.isRequired
 }

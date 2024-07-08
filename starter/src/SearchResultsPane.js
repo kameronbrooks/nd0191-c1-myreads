@@ -31,7 +31,7 @@ const SearchResultsPane = ({searchQuery, searchResults, userBooks, setUserBooks,
 SearchResultsPane.propTypes = {
   searchQuery: PropTypes.string.isRequired,
   searchResults: PropTypes.array.isRequired,
-  userBooks: PropTypes.object.isRequired,
+  userBooks: PropTypes.array.isRequired,
   setUserBooks: PropTypes.func.isRequired,
   setBannerMessage: PropTypes.func.isRequired
 }
