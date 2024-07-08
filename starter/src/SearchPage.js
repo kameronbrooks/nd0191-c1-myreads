@@ -21,7 +21,6 @@ const SearchPage = ({ userBooks, setUserBooks, setBannerMessage }) => {
 
     setSearchResults(searchResults.map(
       (book) => {
-        console.log("Changing search results");
         const userBook = userBooks.find((b) => b.id === book.id);
         return userBook ? userBook : {...book, shelf: 'none'};
       }
